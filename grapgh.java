@@ -135,6 +135,30 @@ class GraphAdjList {
             
         }
     }
+
+    public void shortestPath(int start,Map<Integer,ArrayList<Integer>> adjListMap){
+        Queue<Integer> queue =new LinkedList<>();
+        Set<Integer> visited = new HashSet<>();
+        Map<Integer,Integer> distance =new HashMap<>();
+        queue.add(start);
+        visited.add(start);
+        distance.put(start,0);
+        while(!queue.isEmpty()){
+            int node =queue.poll();
+            int getDistance =distance.get(node);
+            for(Integer neigbour: adjList.get(node)){
+                if(!visited.contains(neigbour)){
+                    queue.add(neigbour);
+                    visited.add(neigbour);
+                    distance.put(neigbour,getDistance+1);
+                }
+            }
+            
+        }
+        for(Integer key:distance.keySet()){
+            System.out.println("distnace btw "+start+" and "+key+"->"+distance.get(key));
+        }
+    }
     
         public void dfs(int start,Map<Integer,ArrayList<Integer>> adjList){
         Stack<Integer> stack =new Stack<>();
